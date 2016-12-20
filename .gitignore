@@ -1,0 +1,7 @@
+*.py[cod]
+
+/.sass-cache
+/.sync
+/.vagrant
+/node_modules
+/public

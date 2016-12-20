@@ -1,0 +1,102 @@
+---
+---
+
+<!DOCTYPE html>
+<html class="no-js"><!-- modernizr rewrites to class="js" -->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width">
+
+        <!--===========================================================
+             site and page titles, with open graph
+        =============================================================-->
+        {% if page.title_override %}
+            <title>{{page.title_override}}</title>
+        {% elsif page.title and page.title != site.title %}
+            <title>{{page.title}} &bull; {{site.title}}</title>
+        {% else %}
+            <title>{{site.title}}</title>
+        {% endif %}
+        <meta property="og:site_name" content="{{site.title}}">
+        <meta property="og:title" content="{{page.title}}">
+
+        <!--===========================================================
+             page description
+        =============================================================-->
+        {% if page.description %}
+            <meta name="description" content="{{page.description|strip_html|strip_newlines}}">
+            <meta property="og:description" content="{{page.description|strip_html|strip_newlines}}">
+        {% endif %}
+
+        {% comment %}
+        <!--===========================================================
+             page image for social sharing
+        =============================================================-->
+        <meta content="/img/logo-high-resolution.png" property="og:image">
+        {% endcomment %}
+
+        <!--===========================================================
+             atom/rss feeds
+        =============================================================-->
+        <link rel="alternate" type="application/atom+xml" title="{{site.title}}" href="/atom.xml">
+        <link rel="alternate" type="application/rss+xml" title="{{site.title}}" href="/rss.xml">
+
+        {% comment %}
+        <script src="/js/vendor/modernizr-3.3.1-custom.min.js"></script>
+        {% endcomment %}
+
+        <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+        <style>
+            /* Workaround for typekit FOUT.
+             * html.js is provided by modernizr and prevents this applying if JS
+             * is disabled (hi Ernie).
+             */
+            html.js body { display: none }
+        </style>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+        {% comment %}
+        <script src="//cdnjs.cloudflare.com/ajax/libs/ramda/0.21.0/ramda.min.js"></script>
+        {% endcomment %}
+
+        <script src="https://use.typekit.net/qqo5uin.js"></script>
+        <script>
+            !function() {
+                function reveal() {
+                    // Make sure body is available when this runs.
+                    $(function() {
+                        $('body').fadeIn(300);  // default 400
+                    });
+                }
+                try {
+                    // https://helpx.adobe.com/typekit/using/font-events.html
+                    Typekit.load({
+                        async: true,
+                        active: reveal,
+                        inactive: reveal
+                    });
+                } catch(e) {
+                    reveal();
+                }
+            }();
+        </script>
+
+        <!-- photoswipe -->
+        <script src="/js/vendor/photoswipe.min.js"></script>
+        <script src="/js/vendor/photoswipe-ui-default.min.js"></script>
+
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-77612407-2', 'auto');
+            ga('send', 'pageview');
+        </script>
+    </head>
+
+    <body class="{{page.body_class|default:layout.body_class}}">
+        {{content|pants}}
+    </body>
+</html>

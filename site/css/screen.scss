@@ -1,0 +1,207 @@
+@import "susy";
+@import "partials/normalize";
+
+/**
+ - Reset
+ */
+
+// http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+blockquote, h1, h2, h3, h4, h5, h6, p, ul, li, fieldset {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    max-width: 100%;
+}
+
+@import "partials/type";
+
+h1 {
+    padding-top: 0.25em;
+    padding-bottom: 0.5em;
+}
+
+/**
+ - anti-debug
+ */
+
+.debug {
+    display: none;
+}
+
+/**
+ - debug
+*/
+
+/*
+.debug {
+    display: block;
+}
+
+main {
+    //background: #777777;
+}
+
+.thumb {
+    position: relative;
+    p {
+        position: absolute;
+        top: 5px;
+        left: 10px;
+        color: black;
+        font-size: 40px;
+    }
+}
+
+.thumb img {
+    opacity: 0.65;
+}
+
+.thumb:nth-child(1),
+.thumb:nth-child(4),
+.thumb:nth-child(5) {
+    background: #ffaaaa;
+}
+
+.thumb:nth-child(2),
+.thumb:nth-child(3),
+.thumb:nth-child(6) {
+    background: #aaaaff;
+}
+*/
+
+/**
+ - base
+*/
+
+main {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.thumb {
+    img {
+        vertical-align: text-top;  // avoid 5px gap below baseline
+    }
+    figcaption {
+        display: none;
+    }
+    display: inline-block;
+    margin-bottom: 10px;
+    width: calc(50% - 5px);  // 10px/2 gutter
+}
+
+.thumb:nth-child(2n+1) {
+    margin-right: 10px;
+}
+
+/**
+ - media queries
+ */
+
+// prep for all media queries
+@media (min-width: 610px) {
+    main {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .thumbs {
+        display: flex;
+        flex-flow: row wrap;
+    }
+    .thumb {
+        display: block;
+        width: 280px;
+    }
+}
+
+@media (min-width: 610px) {
+    main {
+        width: 570px;
+    }
+    .thumb {
+        margin-bottom: 10px;
+    }
+    .thumb:nth-child(2n+1) {
+        margin-right: 10px;
+    }
+}
+
+@media (min-width: 660px) {
+    main {
+        width: 580px;
+    }
+    .thumb {
+        margin-bottom: 20px;
+    }
+    .thumb:nth-child(2n+1) {
+        margin-right: 20px;
+    }
+}
+
+@media (min-width: 710px) {
+    main {
+        width: 590px;
+    }
+    .thumb {
+        margin-bottom: 30px;
+    }
+    .thumb:nth-child(2n+1) {
+        margin-right: 30px;
+    }
+}
+
+@media (min-width: 1020px) {
+    main {
+        width: 900px;
+    }
+    .thumb,
+    .thumb:nth-child(1n+0) {  // reset nth-child(an+b) selectors
+        margin-right: 0px;
+    }
+    .thumb:nth-child(1),
+    .thumb:nth-child(2),
+    .thumb:nth-child(3),
+    .thumb:nth-child(5) {
+        margin-right: 30px;
+    }
+    .thumb {
+        order: 3;
+    }
+    .thumb:nth-child(1),
+    .thumb:nth-child(2) {
+        order: 0;
+    }
+    .thumb:nth-child(3) {
+        order: 2;
+    }
+    .thumb:nth-child(4) {
+        order: 1;
+    }
+}
+
+@media (min-width: 1020px) and (min-height: 740px) {
+    h1 {
+        padding-bottom: 3vh;
+    }
+}
+
+@media (min-width: 1020px) and (min-height: 780px) {
+    h1 {
+        padding-bottom: 5vh;
+    }
+}
+
+@import "partials/flaticon";
+
+$pswp__assets-path: "photoswipe/default-skin/";
+@import "photoswipe/main";
+@import "photoswipe/default-skin/default-skin";

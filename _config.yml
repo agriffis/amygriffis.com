@@ -1,0 +1,18 @@
+source: ./site
+destination: ./public
+include: ['.htaccess', '.nojekyll']
+exclude: ['*.scss']  # because compass
+name: Amy Griffis
+title: Amy Griffis
+email: amy@amygriffis.com
+url: https://amygriffis.com
+rss_description: Amy's Blog
+kramdown:
+  input: Pantsdown
+pants:
+  options: [1, 'named_entities', 'prevent_breaks']
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default

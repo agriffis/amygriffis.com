@@ -1,0 +1,169 @@
+---
+gallery:
+
+  - thumbs:
+      1x: /gallery/thumbs/1x/amygriffis-icons-delonghi-sq.png
+      2x: /gallery/thumbs/2x/amygriffis-icons-delonghi-sq.png
+      3x: /gallery/thumbs/3x/amygriffis-icons-delonghi-sq.png
+    images:
+      - src: /gallery/amygriffis-icons-delonghi.png
+        size: 844x634
+
+  - thumbs:
+      1x: /gallery/thumbs/1x/amygriffis-info-email-sq.png
+      2x: /gallery/thumbs/2x/amygriffis-info-email-sq.png
+      3x: /gallery/thumbs/3x/amygriffis-info-email-sq.png
+    images:
+      - src: /gallery/amygriffis-info-email.jpg
+        size: 2592x1800
+
+  - thumbs:
+      1x: /gallery/thumbs/1x/amygriffis-poster-oop-sq.jpg
+      2x: /gallery/thumbs/2x/amygriffis-poster-oop-sq.jpg
+      3x: /gallery/thumbs/3x/amygriffis-poster-oop-sq.jpg
+    images:
+      - src: /gallery/amygriffis-poster-oop.jpg
+        size: 2300x2200
+
+  - thumbs:
+      1x: /gallery/thumbs/1x/pattern-photo-wax.jpg
+      2x: /gallery/thumbs/2x/pattern-photo-wax.jpg
+      3x: /gallery/thumbs/3x/pattern-photo-wax.jpg
+    images:
+      - src: /gallery/pattern-photo-wax.jpg
+        size: 1728x1728
+      - src: /gallery/pattern-photo-wood.jpg
+        size: 1728x1728
+      - src: /gallery/pattern-photo-wire.jpg
+        size: 1728x1728
+
+  - thumbs:
+      1x: /gallery/thumbs/1x/amygriffis-vector-sage-sq.png
+      2x: /gallery/thumbs/2x/amygriffis-vector-sage-sq.png
+      3x: /gallery/thumbs/3x/amygriffis-vector-sage-sq.png
+    images:
+      - src: /gallery/amygriffis-vector-sage.png
+        size: 634x634
+
+  - thumbs:
+      1x: /gallery/thumbs/1x/amygriffis-book-keller-sq.jpg
+      2x: /gallery/thumbs/2x/amygriffis-book-keller-sq.jpg
+      3x: /gallery/thumbs/3x/amygriffis-book-keller-sq.jpg
+    images:
+      - src: /gallery/amygriffis-book-keller-1.jpg
+        size: 2200x1800
+      - src: /gallery/amygriffis-book-keller-2.jpg
+        size: 2200x1500
+      - src: /gallery/amygriffis-book-keller-3.jpg
+        size: 2200x1500
+
+---
+
+<main>
+
+    <h1>Amy Griffis</h1>
+
+    <div class="thumbs">
+        {% comment %}
+        Cuddle the div tags with for/endfor to remove spaces between inline block elements.
+        {% endcomment %}
+        {% for g in page.gallery %}<div class="thumb">
+                <p class="debug">{{forloop.index}}</p>
+                <a href="{{g.images[0].src}}" class="gallery" data-images="{{g.images|jsonify|xml_escape}}" data-gid="{{forloop.index}}">
+                    <img src="{{g.thumbs.1x}}"
+                         srcset="{% for t in g.thumbs %}{{t[1]}} {{t[0]}}{% unless forloop.last %}, {% endunless %}{% endfor %}">
+                </a>
+            </div>{% endfor %}
+    </div>
+
+</main>
+
+{% include photoswipe.html %}
+
+<script>
+    $(function() {
+        var $pswp = $('.pswp'),
+            $galleries = $('.gallery');
+
+        function parseId(id) {
+            return typeof id === 'string' ? parseInt(id, 10) : id;
+        }
+
+        function openGallery(gid, pid) {
+            gid = parseId(gid) || 1;
+            pid = parseId(pid) || 1;
+            var gallery = $galleries.filter('[data-gid="' + gid + '"]')[0],
+                images = JSON.parse(gallery.dataset.images),
+                items = images.map(function(image, index) {
+                    var geometry = image.size.split('x');
+                    return {
+                        src: image.src,
+                        w: parseInt(geometry[0], 10),
+                        h: parseInt(geometry[1], 10),
+                        title: image.title,
+                    }
+                }),
+                // http://photoswipe.com/documentation/options.html
+                options = {
+                    galleryUID: gid,
+                    index: pid - 1,  // index is 0-based, pid is 1-based
+                    clickToCloseNonZoomable: false,
+                    shareEl: false,
+                    loop: false,
+                },
+                gallery = new PhotoSwipe($pswp[0], PhotoSwipeUI_Default, items, options);
+            gallery.init();
+        }
+
+        $galleries.click(function(e) {
+            e.preventDefault();
+            openGallery(this.dataset.gid);
+        });
+
+        // Photoswipe puts the currently-displayed gallery and photo ids in the
+        // location hash like this:
+        //
+        //   http://172.17.0.6:8000/#&gid=4&pid=2
+        //
+        // The following functions load the appropriate gallery and photo
+        // directly on page load, so they're bookmarkable.
+
+        function parseQueryString(queryString) {
+            var splits = queryString.split("&"),
+                params = {}, i, ss;
+            for (i = 0; i < splits.length; i++) {
+                ss = splits[i].split("=");
+                if (ss.length == 2 && ss[0].length && ss[1].length) {
+                    params[ss[0]] = ss[1];
+                }
+            }
+            return params;
+        }
+
+        function openGalleryFromQueryString(qs) {
+            var params = parseQueryString(qs);
+            if (params.gid) {
+                openGallery(params.gid, params.pid);
+            }
+        }
+
+        function openGalleryFromLocation() {
+            openGalleryFromQueryString(window.location.hash);
+        }
+
+        openGalleryFromLocation();
+
+        // When the user clicks browser back, photoswipe will close the
+        // currently-displayed gallery and update the location bar to remove the
+        // fragment. However it doesn't re-open a gallery automatically if the
+        // user continues clicking back. Hook on window.onpopstate to fix that.
+
+        var _onpopstate = window.onpopstate;
+        window.onpopstate = function(e) {
+            openGalleryFromLocation();
+            if (_onpopstate) {
+                _onpopstate(e);
+            }
+        }
+    });
+</script>
