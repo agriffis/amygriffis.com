@@ -78,7 +78,7 @@ install_packages() {
     packages+=( sudo ssh )
     packages+=( make gcc g++ binutils )
     packages+=( inotify-tools ) # inotifywait
-    packages+=( nodejs )  # add npm if not installing from nodesource
+    packages+=( nodejs yarn )  # add npm if not installing from nodesource
     packages+=( imagemagick )  # for image resizing
 
     # Don't install extra stuff.
@@ -94,6 +94,15 @@ EOT
                 ! -e /etc/apt/sources.list.d/nodesource.list ]]; then
         which curl &>/dev/null || (apt-get update; apt-get install curl -y)
         curl -sL https://deb.nodesource.com/setup_4.x | bash
+    fi
+
+    # Add yarn package manager.
+    if [[ " ${packages[*]} " == *" yarn "* && \
+                ! -e /etc/apt/sources.list.d/yarn.list ]]; then
+        which curl &>/dev/null || (apt-get update; apt-get install curl -y)
+        curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+        echo "deb http://dl.yarnpkg.com/debian/ stable main" | \
+            sudo tee /etc/apt/sources.list.d/yarn.list
     fi
 
     # This should prevent apt-get install/upgrade from asking ANY questions
@@ -193,7 +202,7 @@ user_npm() {
     cd ~
 
     declare found
-    if found=$(src npm-shrinkwrap.json) || found=$(src package.json); then
+    if found=$(src yarn.lock) || found=$(src npm-shrinkwrap.json) || found=$(src package.json); then
         cd "$(dirname "$found")"
 
         # This is a little bit of a hack in that it does a local install to a
@@ -201,7 +210,16 @@ user_npm() {
         # rather than the bind-mounted src dir.
         mkdir -p ~/node_modules
         ln -sfn ~/node_modules node_modules
-        npm install
+
+        if [[ -f yarn.lock ]]; then
+            yarn install
+        elif [[ -f npm-shrinkwrap.json ]]; then
+            npm install
+        elif which yarn &>/dev/null; then
+            yarn install
+        else
+            npm install
+        fi
     fi
 }
 
