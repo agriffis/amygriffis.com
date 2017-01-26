@@ -121,7 +121,7 @@ next: build
 .PHONY: deploy
 deploy: build
 	$(MAKE) _deploy_dream
-#	$(MAKE) _deploy_ghp
+	$(MAKE) _deploy_ghp
 
 .PHONY: _deploy_dream
 _deploy_dream:
