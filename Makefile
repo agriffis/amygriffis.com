@@ -36,7 +36,6 @@ build:
 	$(MAKE) thumbs  # do this first
 	$(MAKE) jekyll
 	$(MAKE) sass
-	[[ $(JEKYLL_ENV) != production ]] || ./post-process.bash
 
 .PHONY: jekyll
 jekyll:
