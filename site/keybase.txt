@@ -1,0 +1,69 @@
+==================================================================
+https://keybase.io/amygriffis
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://amygriffis.com
+  * I am amygriffis (https://keybase.io/amygriffis) on keybase.
+  * I have a public key with fingerprint 2AA7 E6E0 ED8D E787 F856  9DD6 6AAD 5662 E572 2665
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "0101f92dfb11e75afd560cd118f10053229908c7536f0abc8a10337f1d2b737aa6190a",
+            "fingerprint": "2aa7e6e0ed8de787f8569dd66aad5662e5722665",
+            "host": "keybase.io",
+            "key_id": "6aad5662e5722665",
+            "kid": "0101f92dfb11e75afd560cd118f10053229908c7536f0abc8a10337f1d2b737aa6190a",
+            "uid": "2ef27ded74a1c96a0f39d08a7c5e1b19",
+            "username": "amygriffis"
+        },
+        "service": {
+            "hostname": "amygriffis.com",
+            "protocol": "https:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1491839393,
+    "expire_in": 157680000,
+    "prev": "9ba71a79fcf7da778fe0665a9b806bd34df27af7f592d957df47943d34342ecb",
+    "seqno": 11,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.68
+Comment: https://keybase.io/crypto
+
+yMInAnicrVJdSBRRFF6zrISgKCNctp/RJGTRuTM7c+dO4YNgUQT9IFlQbXfm3ruO
+7u6sO+vWJtEPBSUUSA9aRKZkJUUWRakR/ezSQ0VKRIQQKZIGm9gvQUR0R+qpHrv3
+4XLP+b7vfOdwMnNyPfk54e+1TK/6THKePDjT6Nma7e5oEgybpAS9SainUw8NE+ok
+gvUWEXRBBCJgSCLMAIBCBTOiqKJJANAYEEVFliSERM2EiqwyERumhoEoy5ABIhlQ
+hhirAIlY8AvMioZoPBa3ogkuK2EMqUpFSjRCoQaZpqiIEFXFmBdQJapASVJVhRNr
+bcdlcHMGdmiZZfMY/wSn7P0D/599N07JSZRJkFACAxiYSMUikxERNQxNhQIDIBfo
+0HgURyhH40gqFLcYsxxhn1/g8aRlUne0bi9/YcpMO8L5sbidsE07zHO1iUTM0V1u
+IhVzwbupEfwtEzSsKOGz5IwkjTuWHRV0wJFmwnJ1QQABTUb8+gW6J2bFadByEQpU
+NZEftw5NcklkYAgwRMxkkGAINUZFPkCMDE1UDSIHCO8YM8gUPkWkQMICEAVknpAD
+EjUNwW2sIWpzbcB94hDXdKxQFCca41TY9/D+9umenHxP3oxp7pJ58mfP/bN6XTWz
+PC3e0iMz1NiB4Nvhus/+eRvWhkcXbenpPNLbr68eP2hWxBZNnlj8dLS2sqTifW7Z
+/mkTx66sH5p+2Hd1yb2K7r7ezKWiytMf37RfH18QLLZ+DqLyQ7J8qiScHsm2676F
+WeXd3Zu7Ojf35+/Y4F01MKu1Rnpc2lEUGcgurFq70l5xfmz+s+Sr+W0XPr4Zrn8+
+3FBY3pxpcqQvM5du8lTuvDV5ZmRvS6Z542DfxOXyMWXE27bmZV4PmtO87NsPo3V7
+ctsL4Vu3r+5W1ZqCZ5GnBSeHjtp70t91/Cl9/JE3tziwLnVjeXWqofr1uQ/p0cI7
+vuID195mz9qrv3bVHK2+rdy7WLrqF6lNQmY=
+=5mKr
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/amygriffis
+
+==================================================================
+
