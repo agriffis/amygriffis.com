@@ -8,7 +8,7 @@ WATCH_DIRS = site
 GHP_REMOTE = git@github.com:amygriffis/amygriffis.github.io
 NEXT_DEPLOY_DEST = amygriffis@amygriffis.com:next.amygriffis.com/
 DREAM_DEPLOY_DEST = amygriffis@amygriffis.com:amygriffis.com/
-VAGRANT_MAKE = vagrant ssh -- -t make -C /vagrant
+VAGRANT_MAKE = vagrant status | grep -q '^default *running' && vagrant ssh -- -t make -C /vagrant
 THUMBS_BASE = 280
 THUMBS_MULTIPLIERS = 1 2 3
 # use the desired extension on THUMBS rather than the source extension,
